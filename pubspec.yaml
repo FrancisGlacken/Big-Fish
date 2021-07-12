@@ -28,10 +28,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flame: ^1.0.0-releasecandidate.11
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -43,6 +46,21 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/images/cube.png
+    - assets/images/para_1_sky.png
+    - assets/images/para_2_clouds.png
+    - assets/images/space.png
+    - assets/images/stars.png
+    - assets/images/ocean_1.png
+    - assets/images/ocean_2.png
+    - assets/images/new_ocean.png
+    - assets/images/trout.png
+    - assets/images/bubble.png
+    - assets/images/jellyfish.png
+    - assets/images/lilbigfish.png
+    - assets/images/krill.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
