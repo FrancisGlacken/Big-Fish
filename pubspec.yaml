@@ -61,6 +61,8 @@ flutter:
     - assets/images/jellyfish.png
     - assets/images/lilbigfish.png
     - assets/images/krill.png
+    - assets/images/title.png
+    - assets/images/turtle.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

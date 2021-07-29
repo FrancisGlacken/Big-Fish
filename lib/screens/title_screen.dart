@@ -15,22 +15,8 @@ class TitleScreen extends StatelessWidget {
           children: [
             // Game title.
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50.0),
-              child: Text(
-                'Lil Big Fish',
-                style: TextStyle(
-                  fontSize: 50.0,
-                  color: Colors.black,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 20.0,
-                      color: Colors.white,
-                      offset: Offset(0, 0),
-                    )
-                  ],
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.symmetric(vertical: 50.0),
+                child: Image.asset('assets/images/title.png')),
 
             // Play button.
             SizedBox(

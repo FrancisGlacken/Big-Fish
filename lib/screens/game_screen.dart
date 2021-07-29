@@ -1,4 +1,6 @@
+import 'package:big_fish/components/pause_button.dart';
 import 'package:big_fish/game.dart';
+import 'package:big_fish/screens/pause_menu.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +25,17 @@ class GameScreen extends StatelessWidget {
         // widget of any class extending from Flame's Game class.
         child: GameWidget(
           game: _bigFishGame,
+          initialActiveOverlays: [PauseButton.ID],
+          overlayBuilderMap: {
+            PauseButton.ID: (BuildContext context, BigFishGame gameRef) =>
+                PauseButton(
+                  gameRef: gameRef,
+                ),
+            PauseMenu.ID: (BuildContext context, BigFishGame gameRef) =>
+                PauseMenu(
+                  gameRef: gameRef,
+                ),
+          },
           // Initially only pause button overlay will be visible.
           // initialActiveOverlays: [PauseButton.ID],
           // overlayBuilderMap: {

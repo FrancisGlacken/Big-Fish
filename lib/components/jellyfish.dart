@@ -1,17 +1,15 @@
 import 'dart:math';
 
-import 'package:big_fish/components/command.dart';
-import 'package:big_fish/components/player.dart';
 import 'package:big_fish/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 
-class Krill extends SpriteAnimationComponent
+class JellyFish extends SpriteAnimationComponent
     with HasGameRef<BigFishGame>, Hitbox, Collidable {
   num speedModifier = 80;
   Random rng = new Random();
 
-  Krill({
+  JellyFish({
     SpriteAnimation? anim,
     Vector2? position,
     Vector2? size,
@@ -27,7 +25,10 @@ class Krill extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
-    position.x -= 1;
+    x -= speedModifier * dt;
+    speedModifier -= .5;
+    if (speedModifier <= 4) speedModifier = 80;
+    y = y + speedModifier * dt;
 
     if (x < -100 ||
         x > gameRef.size.x + 500 ||
@@ -40,14 +41,9 @@ class Krill extends SpriteAnimationComponent
 
   @override
   void onCollision(Set<Vector2> points, Collidable other) {
-    if (other is PlayerTadpole) {
-      this.remove();
-      final command = Command<PlayerTadpole>(action: (playerTadpole) {
-        playerTadpole.addToScore(1);
-      });
-      gameRef.addCommand(command);
-    }
-    // else if (other is YourOtherCollidable) {
+    // if (other is CollidableScreen) {
+    //   ...
+    // } else if (other is YourOtherCollidable) {
     //   ...
     // }
   }

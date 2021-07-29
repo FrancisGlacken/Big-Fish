@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:big_fish/components/jellyfish.dart';
+import 'package:big_fish/components/krill.dart';
+import 'package:big_fish/components/trout.dart';
 import 'package:big_fish/game.dart';
 import 'package:big_fish/utils/globals.dart';
 import 'package:big_fish/utils/knows_game_size.dart';
@@ -7,9 +10,13 @@ import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
 
 class PlayerTadpole extends SpriteAnimationComponent
-    with KnowsGameSize, Hitbox, Collidable {
+    with KnowsGameSize, HasGameRef<BigFishGame>, Hitbox, Collidable {
   final double speed = 80;
   var fishSize = Vector2.all(32);
+  Random rng = new Random();
+
+  int _score = 0;
+  int get score => _score;
 
   Vector2 _moveDirection = Vector2.zero();
 
@@ -18,8 +25,6 @@ class PlayerTadpole extends SpriteAnimationComponent
     Vector2? position,
     Vector2? size,
   }) : super(animation: anim, position: position, size: size);
-
-  Random rng = new Random();
 
   @override
   Future<void>? onLoad() async {
@@ -59,9 +64,18 @@ class PlayerTadpole extends SpriteAnimationComponent
     this.position.y = position.y + lilBigFishVelocity.y * speed * dt;
 
     //this.position += _moveDirection.normalized() * speed * dt;
+
+    this.position.clamp(
+          Vector2.zero() + this.size / 2,
+          gameRef.size - this.size / 2,
+        );
   }
 
   void setMoveDirection(Vector2 newMoveDirection) {
     _moveDirection = newMoveDirection;
+  }
+
+  void addToScore(int points) {
+    _score += points;
   }
 }
