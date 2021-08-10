@@ -32,6 +32,7 @@ class Turtle extends SpriteAnimationComponent
         y < -100 ||
         y > gameRef.size.y + 100) {
       this.remove();
+      gameRef.turtleSpawner.removeOneTurtleFromPopulation();
     }
 
     super.update(dt);

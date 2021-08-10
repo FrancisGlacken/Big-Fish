@@ -11,23 +11,30 @@ class TroutSpawner extends BaseComponent
     with KnowsGameSize, HasGameRef<BigFishGame> {
   late Timer _timer;
   SpriteAnimation anim;
-  Random rng = Random();
+  Random _rng = Random();
+  int _troutLimit = 30;
+  int _troutPopulation = 0;
 
   TroutSpawner({required this.anim}) : super() {
     _timer = Timer(2, callback: _spawnTrout, repeat: true);
   }
 
   void _spawnTrout() {
-    Vector2 initialSize = Vector2.all(100);
-    Vector2 position = Vector2(-100, gameRef.size.y * rng.nextDouble());
+    Vector2 initialSize = Vector2(80, 40);
+    Vector2 position = Vector2(0, gameRef.size.y * _rng.nextDouble());
 
     //position.clamp(Vector2.zero() + initialSize / 2, gameSize - initialSize / 2);
-
     Trout trout = Trout(anim: anim, position: position, size: initialSize);
 
     trout.anchor = Anchor.center;
+    if (_troutPopulation < _troutLimit) {
+      _troutPopulation += 1;
+      gameRef.add(trout);
+    }
+  }
 
-    gameRef.add(trout);
+  void removeOneTroutFromPopulation() {
+    _troutPopulation -= 1;
   }
 
   @override

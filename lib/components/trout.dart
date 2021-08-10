@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:big_fish/components/command.dart';
+import 'package:big_fish/components/trout_spawner.dart';
 import 'package:big_fish/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/geometry.dart';
@@ -16,12 +18,15 @@ class Trout extends SpriteAnimationComponent
 
   @override
   Future<void>? onLoad() async {
-    final shape = HitboxCircle(definition: .4);
-
-    //HitboxPolygon([Vector2(0, .8), Vector2(-.8, 0), Vector2(0, -.8), Vector2(.5, 0)]);
+    final shape = HitboxPolygon(
+        [Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0)]);
 
     addShape(shape);
   }
+
+  final command = Command<TroutSpawner>(action: (troutSpawner) {
+    troutSpawner.removeOneTroutFromPopulation();
+  });
 
   @override
   void update(double dt) {
@@ -31,6 +36,7 @@ class Trout extends SpriteAnimationComponent
         x > gameRef.viewport.canvasSize.x + 100 ||
         y < -100 ||
         y > gameRef.size.y + 100) {
+      gameRef.addCommand(command);
       this.remove();
     }
 

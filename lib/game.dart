@@ -21,12 +21,12 @@ import 'package:flutter/src/services/raw_keyboard.dart';
 class BigFishGame extends BaseGame with KeyboardEvents, HasCollidables {
   // late Image troutImage;
   // late SpriteAnimationComponent trout;
-  late final TroutSpawner troutSpawner;
-  late final BubbleSpawner bubbleSpawner;
-  late final JellyFishSpawner jellyFishSpawner;
-  late final KrillSpawner krillSpawner;
-  late final TurtleSpawner turtleSpawner;
-  late final ScreenCollidable screenCollidable;
+  late TroutSpawner troutSpawner;
+  late BubbleSpawner bubbleSpawner;
+  late JellyFishSpawner jellyFishSpawner;
+  late KrillSpawner krillSpawner;
+  late TurtleSpawner turtleSpawner;
+  //late ScreenCollidable screenCollidable;
 
   late TextComponent _playerScore;
   late TextComponent _playerHealth;
@@ -89,7 +89,7 @@ class BigFishGame extends BaseGame with KeyboardEvents, HasCollidables {
       'trout.png',
       SpriteAnimationData.sequenced(
         amount: 15,
-        textureSize: Vector2.all(100),
+        textureSize: Vector2(80, 40),
         stepTime: 0.6,
       ),
     );
@@ -112,7 +112,7 @@ class BigFishGame extends BaseGame with KeyboardEvents, HasCollidables {
 
     add(parallax);
     add(_playerTadpole);
-    add(screenCollidable = ScreenCollidable());
+    //add(screenCollidable = ScreenCollidable());
     add(troutSpawner = TroutSpawner(anim: _troutAnim));
     add(bubbleSpawner = BubbleSpawner(sprite: _bubbleSprite));
     add(jellyFishSpawner = JellyFishSpawner(anim: _jellyFishAnim));
@@ -132,8 +132,14 @@ class BigFishGame extends BaseGame with KeyboardEvents, HasCollidables {
     );
 
     add(_playerScore);
+  }
 
-    //playerHealth
+  void reset() {
+    //_playerTadpole.reset();
+
+    components.forEach((element) {
+      element.remove();
+    });
   }
 
   // WASD Keys Control
@@ -155,16 +161,18 @@ class BigFishGame extends BaseGame with KeyboardEvents, HasCollidables {
   void prepare(Component c) {
     super.prepare(c);
 
+    // If the component being prepared is of type KnowsGameSize,
+    // call onResize() on it so that it stores the current game screen size.
     if (c is KnowsGameSize) {
-      c.onGameResize(this.size);
+      c.onResize(this.size);
     }
   }
 
   @override
   void onResize(Vector2 canvasSize) {
-//    canvasSize = Vector2(720, 480);
     super.onResize(canvasSize);
 
+    // Loop over all the components of type KnowsGameSize and resize then as well.
     this.components.whereType<KnowsGameSize>().forEach((component) {
       component.onResize(this.size);
     });

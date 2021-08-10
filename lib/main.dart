@@ -3,12 +3,15 @@ import 'dart:ui';
 import 'package:big_fish/game.dart';
 import 'package:big_fish/screens/title_screen.dart';
 import 'package:flame/components.dart';
+import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/parallax.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  //Flame.device.fullScreen();
   final myGame = BigFishGame();
   runApp(
     MaterialApp(

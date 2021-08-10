@@ -29,6 +29,9 @@ class PauseMenu extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width / 3,
           child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.green)),
             onPressed: () {
               gameRef.resumeEngine();
               gameRef.overlays.remove(PauseMenu.ID);
@@ -44,9 +47,12 @@ class PauseMenu extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width / 3,
           child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(Colors.green)),
             onPressed: () {
               gameRef.overlays.remove(PauseMenu.ID);
-              //gameRef.reset();
+              gameRef.reset();
 
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const TitleScreen(),

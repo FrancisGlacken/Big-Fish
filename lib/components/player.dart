@@ -43,7 +43,7 @@ class PlayerTadpole extends SpriteAnimationComponent
     } else if (other is JellyFish) {
       this.remove();
     } else if (other is Krill) {
-      fishSize += Vector2.all(1);
+      fishSize += Vector2.all(10);
       this.size = fishSize;
     }
   }

@@ -27,7 +27,7 @@ class Krill extends SpriteAnimationComponent
 
   @override
   void update(double dt) {
-    position.x -= 1;
+    position.x -= .5;
 
     if (x < -100 ||
         x > gameRef.size.x + 500 ||
